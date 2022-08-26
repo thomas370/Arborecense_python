@@ -1,8 +1,11 @@
+from asyncio.windows_events import NULL
 from importlib.metadata import files
 import sys
 import os
+import tkinter
 from tkinter import *
 from tkinter import ttk
+from tkinter.messagebox import showinfo
 
 
 def fichierindex():
@@ -64,7 +67,6 @@ def fichierindex():
             os.chdir("views")
             open("View_test.php", "w+")
             os.chdir(".."),
-
         fileshtml.close()
         os.system("code .")
 
@@ -72,8 +74,7 @@ def fichierindex():
         os.system("iwr -useb get.scoop.sh | iex")
         os.system("scoop install symfony-cli")
         os.system("scoop update symfony-cli")
-        os.system(
-            "composer create-project symfony/website-skeleton " + str(entree1.get()))
+        os.system("composer create-project symfony/website-skeleton " + str(entree1.get()))
         os.chdir(str(entree1.get()))
         os.system("symfony serve -d")
         os.system("code .")
@@ -82,8 +83,50 @@ def fichierindex():
         os.mkdir(entree0.get()), os.chdir(entree0.get())
         open('script.py', 'w+'),
         os.system("code .")
+        
+        
+    elif type.current() == 4:
+        os.system("npm install -g @vue/cli")#a revoir pour installer les packages
+        os.system("vue create " + str(entree1.get()))
 
+
+    elif type.current() == 5:
+        os.system("npx create-react-app" + str(entree1.get()))#a tester
+        os.chdir(str(entree1.get()))
+        os.system("npm start")
+        os.system("code .")
     return None
+
+   
+
+
+def modifaffichage(event):
+    a = type.get()
+    if a == "html":
+        cbtn1.pack()
+        cbtn2.pack()
+        cbtn3.pack()
+        cbtn4.pack_forget()
+        return
+    elif a == "php":
+        cbtn1.pack_forget()
+        cbtn2.pack_forget()
+        cbtn3.pack_forget()
+        cbtn4.pack()
+        return
+    elif a == "symfony-project":
+        cbtn1.pack_forget()
+        cbtn2.pack_forget()
+        cbtn3.pack_forget()
+        cbtn4.pack_forget()
+        return
+    elif a == "python":
+        cbtn1.pack_forget()
+        cbtn2.pack_forget()
+        cbtn3.pack_forget()
+        cbtn4.pack_forget()
+        return
+    return
 
 
 fenetre = Tk()
@@ -102,28 +145,23 @@ entree1 = Entry(fenetre, width=50)
 
 # Création d'un label pour le nom du fichier
 label2 = Label(fenetre, text="Entrez le type de fichier (html/php): ")
-type = ttk.Combobox(fenetre, values=["html", "php", "symfony-project", "python"])
+selection = StringVar()
+type = ttk.Combobox(fenetre, values=["html", "php", "symfony-project", "python", "vue-project", "react-project"], textvariable=selection)
 
-#QUand html est selectionné dans le combobox on affiche les boutons boostrap et fontawesome 
-
-
-
-# Création d'un label pour les outils
-label3 = Label(fenetre, text="Selectionner les outils: ")
 btn1 = IntVar()
 btn2 = IntVar()
 btn3 = IntVar()
+btn4 = IntVar()
+
+label3 = Label(fenetre, text="Selectionner les outils: ")
+
 cbtn1 = Checkbutton(fenetre, text="Bootstrap", variable=btn1, )
 cbtn2 = Checkbutton(fenetre, text="Jquery", variable=btn2)
 cbtn3 = Checkbutton(fenetre, text="Fontawesome", variable=btn3)
-
-# Création d'un label pour php
-label4 = Label(fenetre, text="Selectionner un plus: ")
-btn4 = IntVar()
-
 cbtn4 = Checkbutton(fenetre, text="MVC", variable=btn4)
 
-bouton = Button(fenetre, text="Valider", command=lambda: (fichierindex()))
+type.bind('<<ComboboxSelected>>', modifaffichage)
+
 
 label0.pack()
 entree0.pack()
@@ -135,12 +173,11 @@ label2.pack()
 type.pack()
 
 label3.pack()
-cbtn1.pack()
-cbtn2.pack()
-cbtn3.pack()
 
-label4.pack()
-cbtn4.pack()
 
-bouton.pack()
+#
+
+bouton = Button(fenetre, text="Valider",background="light green",command=lambda: (fichierindex()))
+bouton.pack(side=BOTTOM)
+
 fenetre.mainloop()
