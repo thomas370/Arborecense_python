@@ -1,0 +1,19 @@
+/*GENERAL*/
+
+* {
+    box-sizing: border-box;
+}
+  
+html {
+    font-size: 62.5%;
+}
+  
+.clear{
+    clear: both;  /* empéche les colision  */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color:#121212;
+}

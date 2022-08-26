@@ -1,5 +1,7 @@
 from asyncio.windows_events import NULL
+from fileinput import close
 from importlib.metadata import files
+import shutil
 import sys
 import os
 import tkinter
@@ -23,20 +25,23 @@ def fichierindex():
         os.chdir("../.."),
         fileshtml = open("index.html", "w+")
         fileshtml.write("<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t<meta charset=\"UTF-8\">\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<link rel=\"stylesheet\" href=\"assets/css/style.css\">\n")
-
+        os.system("code .")
+        
         if btn3.get() == 1:
             fileshtml.write("\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css\" integrity=\"sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"/> \n")
-
+            os.system("code .")
+            
         if btn1.get() == 1:
             fileshtml.write("\t<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor\" crossorigin=\"anonymous\">\n")
-        fileshtml.write("\t\t<title>" + str(entree1.get()) + "</title>\n\t</head>\n\n\t<body>\n\t\t<section>\n\t\t\t<h2>" + str(
+            fileshtml.write("\t\t<title>" + str(entree1.get()) + "</title>\n\t</head>\n\n\t<body>\n\t\t<section>\n\t\t\t<h2>" + str(
             entree1.get()) + "</h2>\n\t\t\t<p>c'est un paragraphe</p>\n\t\t</section>\n\n\t<script src=\"assets/js/script.js\"></script>\n")
+            os.system("code .")
 
         if btn2.get() == 1:
             fileshtml.write("\t<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js\" integrity=\"sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\"></script>\n")
-        fileshtml.write("\t</body>\n</html>")
-        fileshtml.close()
-        os.system("code .")
+            fileshtml.write("\t</body>\n</html>")
+            fileshtml.close()
+            os.system("code .")
 
     elif type.current() == 1:
         os.mkdir(entree0.get()), os.chdir(entree0.get()), os.mkdir("assets"),
@@ -53,6 +58,7 @@ def fichierindex():
         open('index.php', 'w+'),
         fileshtml = open("index.php", "w+")
         fileshtml.write("<?php \n?>")
+        os.system("code .")
 
         if btn4.get() == 1:
             os.mkdir("controllers")
@@ -80,20 +86,46 @@ def fichierindex():
         os.system("code .")
 
     elif type.current() == 3:
-        os.mkdir(entree0.get()), os.chdir(entree0.get())
-        open('script.py', 'w+'),
+        os.mkdir(entree0.get())
+        os.chdir(entree0.get())
+        open('script.py', 'w+')
         os.system("code .")
         
         
     elif type.current() == 4:
-        os.system("npm install -g @vue/cli")#a revoir pour installer les packages
+        os.system("npm install -g @vue/cli") #vue cli et en maintenence a voir plus tard
         os.system("vue create " + str(entree1.get()))
 
 
     elif type.current() == 5:
-        os.system("npx create-react-app" + str(entree1.get()))#a tester
+        os.mkdir(entree0.get())
+        os.chdir(entree0.get())
+        os.system("npm init -y")
+        os.system("npx create-react-app" + str(entree1.get())) #fonctionne aprés verif
         os.chdir(str(entree1.get()))
         os.system("npm start")
+        os.system("code .")
+        
+    elif type.current() == 6:
+        os.mkdir(entree0.get())
+        os.chdir(entree0.get())
+        os.system("npm init -y")
+        os.system("npm i @discordjs/builders @discordjs/rest axios ciql-json discord-api-types discord.js dotenv fs node-fetch sneaks-api stockx-api")
+        os.mkdir("button")
+        os.mkdir("commands")
+        os.mkdir("events")
+        open(".env", "w+")
+        filesenv = open(".env", "w+")
+        filesenv.write("DISCORD_TOKEN=\nCLIENT_ID=\nGUILD_ID=")
+        filesenv.close()
+        src = "../python/resources/deploy-command.js"
+        dest = "../"+ str(entree0.get()) +"/deploy-command.js"
+        with open(src, 'r') as fsrc:
+            data = fsrc.read()
+        with open(dest, 'w') as fdest:
+            fdest.write(data)
+        fsrc.close()
+        fdest.close()
         os.system("code .")
     return None
 
@@ -146,7 +178,7 @@ entree1 = Entry(fenetre, width=50)
 # Création d'un label pour le nom du fichier
 label2 = Label(fenetre, text="Entrez le type de fichier (html/php): ")
 selection = StringVar()
-type = ttk.Combobox(fenetre, values=["html", "php", "symfony-project", "python", "vue-project", "react-project"], textvariable=selection)
+type = ttk.Combobox(fenetre, values=["html", "php", "symfony-project", "python", "vue-project", "react-project", "bot-discord"], textvariable=selection)
 
 btn1 = IntVar()
 btn2 = IntVar()
