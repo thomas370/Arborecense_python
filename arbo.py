@@ -47,10 +47,10 @@ def create_symfony_project(project_name):
             print("Symfony est installé")
     else:
         print("Tout est installé")
-        os.system("symfony update")
-        os.system("symfony new " + project_name)
+        os.system("composer update")
+        os.system("composer create-project symfony/website-skeleton " + project_name)
         os.chdir(project_name)
-        os.system("composer require symfony/webpack-encore-bundle")
+        os.system("composer install")
         os.system("yarn install")
 # vuejs pas ok
 def create_vue_project(project_name, install_sass = 0):
@@ -161,9 +161,8 @@ def create_react_symfony_project(project_name, install_sass = 0):
         else:
             print("Installation annulée")
             return
-
     try:
-        composer_version = subprocess.check_output(['composer', '-V'])
+        composer_version = subprocess.check_output(['composer'])
         print(f"Composer est installé (version {composer_version.decode().splitlines()[0]})")
     except OSError:
         print("Composer n'est pas installé, voulez-vous l'installer ?")
@@ -176,7 +175,6 @@ def create_react_symfony_project(project_name, install_sass = 0):
         else:
             print("Installation annulée")
             return
-
     try:
         symfony_version = subprocess.check_output(['symfony', '-V'])
         print(f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
@@ -187,7 +185,7 @@ def create_react_symfony_project(project_name, install_sass = 0):
             os.system("scoop install symfony-cli")
             print("Symfony est installé")
     else:
-        os.system("symfony self-update")
+        os.system("composer update")
         os.system("symfony new " + project_name)
         os.chdir(project_name)
         os.system("composer require symfony/webpack-encore-bundle")
@@ -201,6 +199,23 @@ def create_react_symfony_project(project_name, install_sass = 0):
         os.mkdir("components")
         os.chdir("..")
         os.chdir("..")
+        if install_sass == 1:
+            os.system("yarn add sass")
+#intervention user pour la création du projet  nextjs
+def create_nextjs_project(project_name, install_sass = 0):
+    try:
+        node_version = subprocess.check_output(['node', '-v'])
+        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
+    except OSError:
+        print("Node n'est pas installé, voulez-vous l'installer ?")
+        answer = input("Entrez 'oui' ou 'non' : ")
+        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
+            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
+            os.system("scoop install nodejs")
+            print("Node est installé")
+    else:
+        os.system("npx create-next-app " + project_name)
+        os.chdir(project_name)
         if install_sass == 1:
             os.system("yarn add sass")
 
@@ -248,6 +263,13 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+
+    elif project_type == "NextJS":
+        create_nextjs_project(project_name)
+        if btn1.get() == 1:
+            cbtn1.grid(row=9, column=0)
+        else:
+            cbtn1.grid_forget()
     success_label.config(text="Le projet {} a été créé avec succès!".format(project_name))
 
 
@@ -264,6 +286,8 @@ def update_tool_options(event):
     elif project_type == "MERN":
         cbtn1.grid(row=9, column=0)
     elif project_type == "react-symfony":
+        cbtn1.grid(row=9, column=0)
+    elif project_type == "NextJS":
         cbtn1.grid(row=9, column=0)
     else:
         cbtn1.grid_forget()
@@ -290,7 +314,7 @@ label1 = tk.Label(fenetre, background="#03224c", foreground="White", text="Chois
 label1.grid(row=3, column=0)
 
 # Création d'une liste déroulante pour le type de projet
-type = ttk.Combobox(fenetre, values=["symfony-project", "vue-project", "react-project", "bot-discord", "MERN", "react-symfony"])
+type = ttk.Combobox(fenetre, values=["symfony-project", "vue-project", "react-project", "bot-discord", "MERN", "react-symfony", "NextJS"])
 type.current(0)
 
 type.bind("<<ComboboxSelected>>", update_tool_options)
