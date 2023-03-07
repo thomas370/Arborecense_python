@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c830cb8e-3d76-434e-ac9c-bb65f032298b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arbo.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbo.py" afterDir="false" />
     </list>
@@ -55,6 +56,7 @@
       <workItem from="1678009296999" duration="242000" />
       <workItem from="1678035512186" duration="1517000" />
       <workItem from="1678051761730" duration="512000" />
+      <workItem from="1678218892218" duration="2622000" />
     </task>
     <servers />
   </component>
@@ -63,6 +65,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Arborecense_python$orno.coverage" NAME="orno Coverage Results" MODIFIED="1677968790472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Arborecense_python$arbo.coverage" NAME="arbo Coverage Results" MODIFIED="1678052069526" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arborecense_python$arbo.coverage" NAME="arbo Coverage Results" MODIFIED="1678221555950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

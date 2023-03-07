@@ -5,8 +5,22 @@ from tkinter import ttk
 import keyboard
 import subprocess
 
+def testInstallNode():
+    try:
+        node_version = subprocess.check_output(['node', '-v'])
+        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
+    except OSError:
+        print("Node n'est pas installé, voulez-vous l'installer ?")
+        answer = input("Entrez 'oui' ou 'non' : ")
+        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
+            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
+            os.system("scoop install nodejs nvm")
+            print("Node est installé")
+        else:
+            print("Installation annulée")
+            return
 
-def create_symfony_project(project_name):
+def testInstallPHP():
     try:
         php_version = subprocess.check_output(['php', '-v'])
         print(f"PHP est installé (version {php_version.decode().splitlines()[0]})")
@@ -21,8 +35,10 @@ def create_symfony_project(project_name):
             print("Installation annulée")
             return
 
+def testInstallComposer():
+    testInstallPHP()
     try:
-        composer_version = subprocess.check_output(['composer'])
+        composer_version = subprocess.check_output(['composer --version'])
         print(f"Composer est installé (version {composer_version.decode().splitlines()[0]})")
     except OSError:
         print("Composer n'est pas installé, voulez-vous l'installer ?")
@@ -36,8 +52,10 @@ def create_symfony_project(project_name):
             print("Installation annulée")
             return
 
+def testInstallsymfony():
+    testInstallComposer()
     try:
-        symfony_version = subprocess.check_output(['symfony', '-V'])
+        symfony_version = subprocess.check_output(['symfony -v'])
         print(f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
     except OSError:
         print("Symfony n'est pas installé, voulez-vous l'installer ?")
@@ -45,179 +63,99 @@ def create_symfony_project(project_name):
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
             os.system("scoop install symfony-cli")
             print("Symfony est installé")
-    else:
-        print("Tout est installé")
-        os.system("composer update")
-        os.system("composer create-project symfony/website-skeleton " + project_name)
-        os.chdir(project_name)
-        os.system("composer install")
-        os.system("yarn install")
+        else:
+            print("Installation annulée")
+            return
+#Symfony ok
+def create_symfony_project(project_name):
+    testInstallsymfony()
+    print("Tout est installé")
+    os.system("composer create-project symfony/website-skeleton " + project_name)
+    os.chdir(project_name)
+    os.system("composer install")
+    os.system("yarn install")
+
 # vuejs pas ok
 def create_vue_project(project_name, install_sass = 0):
-    try:
-        node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Node n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install nodejs")
-            print("Node est installé")
-    else:
-        os.system("npm install -g @vue/cli")
-        os.system("vue create " + project_name)
-        time.sleep(10)
-        keyboard.press_and_release("enter")
-        os.chdir(project_name)
-        os.system("yarn install")
-        if install_sass:
-            os.system("yarn add sass")
+    testInstallNode()
+    os.system("npm install -g @vue/cli")
+    os.system("vue create " + project_name)
+    time.sleep(10)
+    keyboard.press_and_release("enter")
+    os.chdir(project_name)
+    os.system("yarn install")
+    if install_sass:
+        os.system("yarn add sass")
+
 
 #React ok
 def create_react_project(project_name, install_sass = 0):
-    try:
-        node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Node n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install nodejs")
-            print("Node est installé")
-    else:
-        os.system("npx create-react-app " + project_name)
-        os.chdir(project_name)
-        os.system("yarn install")
-        os.chdir("src")
-        os.mkdir("components")
-        if install_sass:
-            os.system("yarn add sass")
+    testInstallNode()
+    os.system("npx create-react-app " + project_name)
+    os.chdir(project_name)
+    os.system("yarn install")
+    os.chdir("src")
+    os.mkdir("components")
+    if install_sass:
+        os.system("yarn add sass")
+
 
 #Bot Discord ok
 def create_bot_discord():
-    try:
-        node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Node n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install nodejs")
-            print("Node est installé")
-    else:
-        os.system("git clone https://github.com/DamienFoulon/obot.git")
-        os.chdir("obot")
-        os.system("npm install")
+    testInstallNode()
+    os.system("git clone https://github.com/DamienFoulon/obot.git")
+    os.chdir("obot")
+    os.system("npm install")
 
 #MERN ok
 def create_mern_stack(project_name, install_sass = 0):
-    try:
-        node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Node n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install nodejs")
-            print("Node est installé")
-    else:
-        os.system("mkdir " + project_name)
-        os.chdir(project_name)
-        os.mkdir("server")
-        os.chdir("server")
-        os.system("npm install express cors mongoose dotenv")
-        os.system("npm init -y")
-        os.system("npm install -D nodemon")
-        os.chdir("..")
-        os.system("npx create-react-app client")
+    testInstallNode()
+    os.system("mkdir " + project_name)
+    os.chdir(project_name)
+    os.mkdir("server")
+    os.chdir("server")
+    os.system("npm install express cors mongoose dotenv")
+    os.system("npm init -y")
+    os.system("npm install -D nodemon")
+    os.chdir("..")
+    os.system("npx create-react-app client")
+    os.chdir("client")
+    os.chdir("src")
+    os.mkdir("components")
+    os.mkdir("pages")
+    os.mkdir("styles")
+    os.chdir("..")
+    if install_sass == 1:
         os.chdir("client")
-        os.chdir("src")
-        os.mkdir("components")
-        os.mkdir("pages")
-        os.mkdir("styles")
+        os.system("yarn add sass")
         os.chdir("..")
-        if install_sass == 1:
-            os.chdir("client")
-            os.system("yarn add sass")
-            os.chdir("..")
+
 
 #React Symfony ok
 def create_react_symfony_project(project_name, install_sass = 0):
-    try:
-        php_version = subprocess.check_output(['php', '-v'])
-        print(f"PHP est installé (version {php_version.decode().splitlines()[0]})")
-    except OSError:
-        print("PHP n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system(
-                "powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install php")
-            print("PHP est installé")
-        else:
-            print("Installation annulée")
-            return
-    try:
-        composer_version = subprocess.check_output(['composer'])
-        print(f"Composer est installé (version {composer_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Composer n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
-            os.system("php composer-setup.php")
-            os.system("php -r \"unlink('composer-setup.php');\"")
-            print("Composer est installé")
-        else:
-            print("Installation annulée")
-            return
-    try:
-        symfony_version = subprocess.check_output(['symfony', '-V'])
-        print(f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Symfony n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("scoop install symfony-cli")
-            print("Symfony est installé")
-    else:
-        os.system("composer update")
-        os.system("symfony new " + project_name)
-        os.chdir(project_name)
-        os.system("composer require symfony/webpack-encore-bundle")
-        os.system("yarn install")
-        os.system("yarn add @symfony/webpack-encore --dev")
-        os.system("npx create-react-app")
-        os.system("yarn install")
-        os.chdir("assets")
-        os.mkdir("js")
-        os.chdir("js")
-        os.mkdir("components")
-        os.chdir("..")
-        os.chdir("..")
-        if install_sass == 1:
-            os.system("yarn add sass")
+    testInstallsymfony()
+    os.system("symfony new " + project_name)
+    os.chdir(project_name)
+    os.system("composer require symfony/webpack-encore-bundle")
+    os.system("yarn install")
+    os.system("yarn add @symfony/webpack-encore --dev")
+    os.system("npx create-react-app")
+    os.system("yarn install")
+    os.chdir("assets")
+    os.mkdir("js")
+    os.chdir("js")
+    os.mkdir("components")
+    os.chdir("..")
+    os.chdir("..")
+    if install_sass == 1:
+        os.system("yarn add sass")
 #intervention user pour la création du projet  nextjs
 def create_nextjs_project(project_name, install_sass = 0):
-    try:
-        node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
-    except OSError:
-        print("Node n'est pas installé, voulez-vous l'installer ?")
-        answer = input("Entrez 'oui' ou 'non' : ")
-        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
-            os.system("scoop install nodejs")
-            print("Node est installé")
-    else:
-        os.system("npx create-next-app " + project_name)
-        os.chdir(project_name)
-        if install_sass == 1:
-            os.system("yarn add sass")
+    testInstallNode()
+    os.system("npx create-next-app " + project_name)
+    os.chdir(project_name)
+    if install_sass == 1:
+        os.system("yarn add sass")
 
 
 def create_project():
