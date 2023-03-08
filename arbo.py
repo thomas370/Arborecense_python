@@ -86,7 +86,7 @@ def create_vue_project(project_name, install_sass = 0, routage = 0):
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass:
-        os.system("yarn add sass")
+        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -103,7 +103,7 @@ def create_react_project(project_name, install_sass = 0, routage = 0):
     os.mkdir("components")
     os.chdir("..")
     if install_sass:
-        os.system("yarn add sass")
+        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -139,7 +139,7 @@ def create_mern_stack(project_name, install_sass = 0, routage = 0):
     os.chdir("..")
     if install_sass == 1:
         os.chdir("client")
-        os.system("yarn add sass")
+        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
         os.chdir("..")
     elif routage == 1:
         os.chdir("src")
@@ -165,7 +165,7 @@ def create_react_symfony_project(project_name, install_sass = 0, routage = 0):
     os.chdir("..")
     os.chdir("..")
     if install_sass == 1:
-        os.system("yarn add sass")
+        os.system("yarn add sass") #ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -180,7 +180,7 @@ def create_nextjs_project(project_name, install_sass = 0, routage = 0):
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass == 1:
-        os.system("yarn add sass")
+        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -291,8 +291,8 @@ def update_tool_options(event):
         cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
         cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "NextJS":
-        cbtn1.grid(row=9, column=0, padx=10, pady=5)
-        cbtn2.grid.forget()
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     else:
         cbtn1.grid_forget()
 

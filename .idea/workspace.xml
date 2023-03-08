@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c830cb8e-3d76-434e-ac9c-bb65f032298b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arbo.py" beforeDir="false" afterPath="$PROJECT_DIR$/arbo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <workItem from="1678269683153" duration="826000" />
       <workItem from="1678294448680" duration="2689000" />
       <workItem from="1678299300089" duration="4631000" />
-      <workItem from="1678317015481" duration="1341000" />
+      <workItem from="1678317015481" duration="2203000" />
     </task>
     <servers />
   </component>
