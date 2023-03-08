@@ -40,6 +40,6 @@ subprocess : pip install subprocess
 Contributions are always welcome!  
 juste create a pull request 
   
-## Contributeurs
+## contributor
 [@thomas370](https://github.com/thomas370)  
 [@Titi7750](https://github.com/Titi7750)
