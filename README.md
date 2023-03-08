@@ -8,7 +8,7 @@ This python script generated you your project tree
 - Laravel project creation
 - basic routing with option
 - component basic (menu, footer, shearch ect..)
-- 
+
 
 
 ## Installation
