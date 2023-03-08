@@ -55,7 +55,7 @@ def testInstallComposer():
 def testInstallsymfony():
     testInstallComposer()
     try:
-        symfony_version = subprocess.check_output(['symfony -v'])
+        symfony_version = subprocess.check_output(['symfony'])
         print(f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
     except OSError:
         print("Symfony n'est pas installé, voulez-vous l'installer ?")
@@ -73,6 +73,7 @@ def create_symfony_project(project_name):
     os.system("composer create-project symfony/website-skeleton " + project_name)
     os.chdir(project_name)
     os.system("composer install")
+    os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
 
 # vuejs pas ok
@@ -149,11 +150,13 @@ def create_react_symfony_project(project_name, install_sass = 0):
     os.chdir("..")
     if install_sass == 1:
         os.system("yarn add sass")
+
 #intervention user pour la création du projet  nextjs
 def create_nextjs_project(project_name, install_sass = 0):
     testInstallNode()
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
+    os.system("yarn install")
     if install_sass == 1:
         os.system("yarn add sass")
 
@@ -208,12 +211,15 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
-    success_label.config(text="Le projet {} a été créé avec succès!".format(project_name))
+            success_label.config(text="Le projet {} a été créé avec succès!".format(project_name))
+
 
 
 def update_tool_options(event):
     project_type = type.get().strip()
     if project_type == "symfony-project":
+        cbtn1.grid_forget()
+    elif project_type == "bot-discord":
         cbtn1.grid_forget()
     elif project_type == "react-symfony":
         cbtn1.grid(row=9, column=0)
@@ -269,6 +275,7 @@ success_label.grid(row=6, column=0, columnspan=2)
 # Création d'un bouton pour installer sass
 btn1 = tk.IntVar()
 cbtn1 = tk.Checkbutton(fenetre, text="Installer sass", variable=btn1)
+
 
 # Création d'un bouton pour créer le projet
 bouton = tk.Button(fenetre, text="Créer le projet", command=create_project)
