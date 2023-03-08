@@ -77,7 +77,7 @@ def create_symfony_project(project_name):
     os.system("yarn install")
 
 # vuejs pas ok
-def create_vue_project(project_name, install_sass = 0):
+def create_vue_project(project_name, install_sass = 0, routage = 0):
     testInstallNode()
     os.system("npm install -g @vue/cli")
     os.system("vue create " + project_name)
@@ -87,10 +87,11 @@ def create_vue_project(project_name, install_sass = 0):
     os.system("yarn install")
     if install_sass:
         os.system("yarn add sass")
-
+    elif routage == 1:
+        os.system("yarn add react-router-dom")
 
 #React ok
-def create_react_project(project_name, install_sass = 0):
+def create_react_project(project_name, install_sass = 0, routage = 0):
     testInstallNode()
     os.system("npx create-react-app " + project_name)
     os.chdir(project_name)
@@ -99,6 +100,8 @@ def create_react_project(project_name, install_sass = 0):
     os.mkdir("components")
     if install_sass:
         os.system("yarn add sass")
+    elif routage == 1:
+        os.system("yarn add react-router-dom")
 
 
 #Bot Discord ok
@@ -109,7 +112,7 @@ def create_bot_discord():
     os.system("npm install")
 
 #MERN ok
-def create_mern_stack(project_name, install_sass = 0):
+def create_mern_stack(project_name, install_sass = 0, routage = 0):
     testInstallNode()
     os.system("mkdir " + project_name)
     os.chdir(project_name)
@@ -130,10 +133,12 @@ def create_mern_stack(project_name, install_sass = 0):
         os.chdir("client")
         os.system("yarn add sass")
         os.chdir("..")
+    elif routage == 1:
+        os.system("yarn add react-router-dom")
 
 
 #React Symfony ok
-def create_react_symfony_project(project_name, install_sass = 0):
+def create_react_symfony_project(project_name, install_sass = 0, routage = 0):
     testInstallsymfony()
     os.system("symfony new " + project_name)
     os.chdir(project_name)
@@ -150,6 +155,9 @@ def create_react_symfony_project(project_name, install_sass = 0):
     os.chdir("..")
     if install_sass == 1:
         os.system("yarn add sass")
+    elif routage == 1:
+        os.system("yarn add react-router-dom")
+
 
 #intervention user pour la création du projet  nextjs
 def create_nextjs_project(project_name, install_sass = 0):
@@ -219,20 +227,25 @@ def update_tool_options(event):
     project_type = type.get().strip()
     if project_type == "symfony-project":
         cbtn1.grid_forget()
+        cbtn2.grid_forget()
     elif project_type == "bot-discord":
         cbtn1.grid_forget()
+        cbtn2.grid_forget()
     elif project_type == "react-symfony":
-        cbtn1.grid(row=9, column=0)
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "vue-project":
-        cbtn1.grid(row=9, column=0)
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "react-project":
-        cbtn1.grid(row=9, column=0)
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "MERN":
-        cbtn1.grid(row=9, column=0)
-    elif project_type == "react-symfony":
-        cbtn1.grid(row=9, column=0)
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "NextJS":
-        cbtn1.grid(row=9, column=0)
+        cbtn1.grid(row=9, column=0, padx=10, pady=5)
+        cbtn2.grid.forget()
     else:
         cbtn1.grid_forget()
 
@@ -276,10 +289,14 @@ success_label.grid(row=6, column=0, columnspan=2)
 btn1 = tk.IntVar()
 cbtn1 = tk.Checkbutton(fenetre, text="Installer sass", variable=btn1)
 
+# Création d'un bouton pour installer un routage basique
+btn2 = tk.IntVar()
+cbtn2 = tk.Checkbutton(fenetre, text="Routage", variable=btn2)
+
 
 # Création d'un bouton pour créer le projet
 bouton = tk.Button(fenetre, text="Créer le projet", command=create_project)
-bouton.grid(row=10, column=1)
+bouton.grid(row=11, column=1)
 
 # Lancement de la boucle principale
 fenetre.mainloop()
