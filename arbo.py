@@ -88,6 +88,9 @@ def create_vue_project(project_name, install_sass = 0, routage = 0):
     if install_sass:
         os.system("yarn add sass")
     elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
         os.system("yarn add react-router-dom")
 
 #React ok
@@ -98,10 +101,15 @@ def create_react_project(project_name, install_sass = 0, routage = 0):
     os.system("yarn install")
     os.chdir("src")
     os.mkdir("components")
+    os.chdir("..")
     if install_sass:
         os.system("yarn add sass")
     elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
         os.system("yarn add react-router-dom")
+
 
 
 #Bot Discord ok
@@ -134,6 +142,9 @@ def create_mern_stack(project_name, install_sass = 0, routage = 0):
         os.system("yarn add sass")
         os.chdir("..")
     elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
         os.system("yarn add react-router-dom")
 
 
@@ -156,22 +167,31 @@ def create_react_symfony_project(project_name, install_sass = 0, routage = 0):
     if install_sass == 1:
         os.system("yarn add sass")
     elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
         os.system("yarn add react-router-dom")
 
 
 #intervention user pour la création du projet  nextjs
-def create_nextjs_project(project_name, install_sass = 0):
+def create_nextjs_project(project_name, install_sass = 0, routage = 0):
     testInstallNode()
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass == 1:
         os.system("yarn add sass")
-
+    elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
+        os.system("yarn add react-router-dom")
 
 def create_project():
     project_name = entree0.get().strip()
     project_type = type.get().strip()
+    install_sass = btn1.get()
+    routage = btn2.get()
     if not project_name:
         # Si le nom du projet n'est pas saisi, afficher une erreur
         error_label.config(text="Veuillez saisir un nom de projet.")
@@ -180,6 +200,7 @@ def create_project():
     if project_type == "symfony-project":
         create_symfony_project(project_name)
         cbtn1.grid_forget()
+        cbtn2.grid_forget()
 
     elif project_type == "vue-project":
         create_vue_project(project_name)
@@ -187,38 +208,64 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.pack_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.pack_forget()
 
     elif project_type == "react-project":
-        create_react_project(project_name)
+        create_react_project(project_name,install_sass,routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.pack_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.pack_forget()
+
 
     elif project_type == "bot-discord":
         create_bot_discord()
         cbtn1.grid_forget()
+        cbtn2.grid_forget()
+
 
     elif project_type == "MERN":
-        create_mern_stack(project_name)
+        create_mern_stack(project_name,install_sass,routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.grid_forget()
+
 
     elif project_type == "react-symfony":
-        create_react_symfony_project(project_name)
+        create_react_symfony_project(project_name,install_sass,routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.grid_forget()
+
 
     elif project_type == "NextJS":
-        create_nextjs_project(project_name)
+        create_nextjs_project(project_name,install_sass,routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.grid_forget()
+
             success_label.config(text="Le projet {} a été créé avec succès!".format(project_name))
 
 
