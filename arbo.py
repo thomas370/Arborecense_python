@@ -5,6 +5,21 @@ from tkinter import ttk
 import keyboard
 import subprocess
 
+def install_options_sass():
+    os.chdir("src")
+    os.mkdir("assets")
+    os.chdir("assets")
+    os.mkdir("scss")
+    os.chdir("scss")
+    main = open("main.scss", "w+")  # créer le fichier main.scss
+    main.close()
+    variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+    variables.close()
+    responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+    responsive.close()
+    os.system("yarn add sass")
+    os.chdir("../../../")
+    return
 
 def testInstallNode():
     try:
@@ -116,14 +131,8 @@ def create_vue_project(project_name, install_sass=0, routage=0):
     keyboard.press_and_release("enter")
     os.chdir(project_name)
     os.system("yarn install")
-    if install_sass:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        #créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+    if install_sass == 1:
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -140,13 +149,7 @@ def create_react_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     if install_sass == 1:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        # créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -179,14 +182,7 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
     os.mkdir("styles")
     os.chdir("..")
     if install_sass == 1:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        # créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
-        os.chdir("..")
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -210,13 +206,7 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
     os.chdir("..")
     os.chdir("..")
     if install_sass == 1:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        # créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -231,13 +221,7 @@ def create_nextjs_project(project_name, install_sass=0, routage=0):
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass == 1:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        # créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
@@ -262,13 +246,7 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0):
     os.chdir("..")
     os.chdir("..")
     if install_sass == 1:
-        os.chdir("src")
-        os.mkdir("assets")
-        os.chdir("assets")
-        os.mkdir("scss")
-        os.chdir("scss")
-        # créer les fichier main.scss, _variables.scss, _responsive.scss
-        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+        install_options_sass()
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
