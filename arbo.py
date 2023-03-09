@@ -117,6 +117,12 @@ def create_vue_project(project_name, install_sass=0, routage=0):
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass:
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        #créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
@@ -134,6 +140,12 @@ def create_react_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     if install_sass:
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        # créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
@@ -168,6 +180,12 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
     os.chdir("..")
     if install_sass == 1:
         os.chdir("client")
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        # créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
         os.chdir("..")
     elif routage == 1:
@@ -192,7 +210,13 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass == 1:
+    if install_sass:
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        # créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
@@ -207,7 +231,13 @@ def create_nextjs_project(project_name, install_sass=0, routage=0):
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
     os.system("yarn install")
-    if install_sass == 1:
+    if install_sass:
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        # créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
@@ -232,7 +262,13 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass == 1:
+    if install_sass:
+        os.chdir("src")
+        os.mkdir("assets")
+        os.chdir("assets")
+        os.mkdir("scss")
+        os.chdir("scss")
+        # créer les fichier main.scss, _variables.scss, _responsive.scss
         os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
