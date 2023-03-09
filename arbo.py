@@ -78,6 +78,22 @@ def testInstallsymfony():
             print("Installation annulée")
             return
         
+def testInstallLaravel():
+    testInstallComposer()
+    try:
+        laravel_version = subprocess.check_output(['laravel'])
+        print(
+            f"Laravel est installé (version {laravel_version.decode().splitlines()[0]})")
+    except OSError:
+        print("Laravel n'est pas installé, voulez-vous l'installer ?")
+        answer = input("Entrez 'oui' ou 'non' : ")
+        if answer.lower() in {'oui', 'o', 'yes', 'y'}:
+            os.system("composer global require laravel/installer")
+            print("Laravel est installé")
+        else:
+            print("Installation annulée")
+            return
+        
 # Verifications technologies
 
 # Symfony ok
@@ -223,6 +239,13 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0):
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
+# Laravel ok
+def create_laravel_project(project_name):
+    testInstallLaravel()
+    os.system("laravel new " + project_name)
+    os.chdir(project_name)
+    os.system("laravel new blog")
+
 # Create project
 def create_project():
     project_name = entree0.get().strip()
@@ -310,6 +333,17 @@ def create_project():
         else:
             cbtn2.grid_forget()
 
+    elif project_type == "Laravel-Project":
+        create_laravel_project(project_name)
+        if btn1.get() == 1:
+            cbtn1.grid(row=9, column=0)
+        else:
+            cbtn1.grid_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.grid_forget()
+
             success_label.config(
                 text="Le projet {} a été créé avec succès!".format(project_name))
 
@@ -340,6 +374,9 @@ def update_tool_options(event):
     elif project_type == "next-symfony":
         cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
         cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
+    elif project_type == "laravel-project":
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     else:
         cbtn1.grid_forget()
 
@@ -366,7 +403,7 @@ label1.grid(row=3, column=0)
 
 # Création d'une liste déroulante pour le type de projet
 type = ttk.Combobox(fenetre, values=["Symfony-Project", "Vue-Project",
-                    "React-Project", "bot-discord", "MERN", "React-Symfony", "NextJS", "Next-Symfony"])
+                    "React-Project", "bot-discord", "MERN", "React-Symfony", "NextJS", "Next-Symfony", "Laravel-Project"])
 type.current(0)
 
 type.bind("<<ComboboxSelected>>", update_tool_options)
