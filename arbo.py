@@ -139,7 +139,7 @@ def create_react_project(project_name, install_sass=0, routage=0):
     os.chdir("src")
     os.mkdir("components")
     os.chdir("..")
-    if install_sass:
+    if install_sass == 1:
         os.chdir("src")
         os.mkdir("assets")
         os.chdir("assets")
@@ -210,7 +210,7 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass:
+    if install_sass == 1:
         os.chdir("src")
         os.mkdir("assets")
         os.chdir("assets")
@@ -231,7 +231,7 @@ def create_nextjs_project(project_name, install_sass=0, routage=0):
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
     os.system("yarn install")
-    if install_sass:
+    if install_sass == 1:
         os.chdir("src")
         os.mkdir("assets")
         os.chdir("assets")
@@ -262,7 +262,7 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass:
+    if install_sass == 1:
         os.chdir("src")
         os.mkdir("assets")
         os.chdir("assets")
