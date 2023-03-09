@@ -179,7 +179,6 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
     os.mkdir("styles")
     os.chdir("..")
     if install_sass == 1:
-        os.chdir("client")
         os.chdir("src")
         os.mkdir("assets")
         os.chdir("assets")
