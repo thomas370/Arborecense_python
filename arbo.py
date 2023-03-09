@@ -77,7 +77,8 @@ def testInstallsymfony():
         else:
             print("Installation annulée")
             return
-        
+
+
 def testInstallLaravel():
     testInstallComposer()
     try:
@@ -93,7 +94,7 @@ def testInstallLaravel():
         else:
             print("Installation annulée")
             return
-        
+
 # Verifications technologies
 
 # Symfony ok
@@ -335,17 +336,11 @@ def create_project():
 
     elif project_type == "Laravel-Project":
         create_laravel_project(project_name)
-        if btn1.get() == 1:
-            cbtn1.grid(row=9, column=0)
-        else:
-            cbtn1.grid_forget()
-        if btn2.get() == 1:
-            cbtn2.grid(row=10, column=0)
-        else:
-            cbtn2.grid_forget()
+        cbtn1.grid_forget()
+        cbtn2.grid_forget()
 
-            success_label.config(
-                text="Le projet {} a été créé avec succès!".format(project_name))
+        success_label.config(
+            text="Le projet {} a été créé avec succès!".format(project_name))
 
 
 def update_tool_options(event):
@@ -375,8 +370,8 @@ def update_tool_options(event):
         cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
         cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "laravel-project":
-        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
-        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
+        cbtn1.grid()
+        cbtn2.grid()
     else:
         cbtn1.grid_forget()
 
