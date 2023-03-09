@@ -370,8 +370,8 @@ def update_tool_options(event):
         cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
         cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     elif project_type == "laravel-project":
-        cbtn1.grid()
-        cbtn2.grid()
+        cbtn1.grid_forget()
+        cbtn2.grid_forget()
     else:
         cbtn1.grid_forget()
 

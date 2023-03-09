@@ -60,7 +60,8 @@
       <workItem from="1678269683153" duration="826000" />
       <workItem from="1678294448680" duration="2689000" />
       <workItem from="1678299300089" duration="4631000" />
-      <workItem from="1678317015481" duration="2203000" />
+      <workItem from="1678317015481" duration="2513000" />
+      <workItem from="1678357755381" duration="2765000" />
     </task>
     <servers />
   </component>
@@ -69,6 +70,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Arborecense_python$orno.coverage" NAME="orno Coverage Results" MODIFIED="1677968790472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Arborecense_python$arbo.coverage" NAME="arbo Coverage Results" MODIFIED="1678318180224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Arborecense_python$arbo.coverage" NAME="arbo Coverage Results" MODIFIED="1678357827071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
