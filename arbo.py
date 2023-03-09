@@ -245,7 +245,6 @@ def create_laravel_project(project_name):
     testInstallLaravel()
     os.system("laravel new " + project_name)
     os.chdir(project_name)
-    os.system("laravel new blog")
 
 # Create project
 def create_project():
