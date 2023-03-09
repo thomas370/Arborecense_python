@@ -5,46 +5,55 @@ from tkinter import ttk
 import keyboard
 import subprocess
 
+
 def testInstallNode():
     try:
         node_version = subprocess.check_output(['node', '-v'])
-        print(f"Node est installé (version {node_version.decode().splitlines()[0]})")
+        print(
+            f"Node est installé (version {node_version.decode().splitlines()[0]})")
     except OSError:
         print("Node n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
+            os.system(
+                "powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
             os.system("scoop install nodejs nvm")
             print("Node est installé")
         else:
             print("Installation annulée")
             return
 
+
 def testInstallPHP():
     try:
         php_version = subprocess.check_output(['php', '-v'])
-        print(f"PHP est installé (version {php_version.decode().splitlines()[0]})")
+        print(
+            f"PHP est installé (version {php_version.decode().splitlines()[0]})")
     except OSError:
         print("PHP n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
+            os.system(
+                "powershell.exe -Command \"Invoke-WebRequest -Uri https://get.scoop.sh -UseBasicParsing | Invoke-Expression\"")
             os.system("scoop install php")
             print("PHP est installé")
         else:
             print("Installation annulée")
             return
 
+
 def testInstallComposer():
     testInstallPHP()
     try:
         composer_version = subprocess.check_output(['composer --version'])
-        print(f"Composer est installé (version {composer_version.decode().splitlines()[0]})")
+        print(
+            f"Composer est installé (version {composer_version.decode().splitlines()[0]})")
     except OSError:
         print("Composer n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
+            os.system(
+                "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
             os.system("php composer-setup.php")
             os.system("php -r \"unlink('composer-setup.php');\"")
             print("Composer est installé")
@@ -52,11 +61,13 @@ def testInstallComposer():
             print("Installation annulée")
             return
 
+
 def testInstallsymfony():
     testInstallComposer()
     try:
         symfony_version = subprocess.check_output(['symfony'])
-        print(f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
+        print(
+            f"Symfony est installé (version {symfony_version.decode().splitlines()[0]})")
     except OSError:
         print("Symfony n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
@@ -66,7 +77,10 @@ def testInstallsymfony():
         else:
             print("Installation annulée")
             return
-#Symfony ok
+        
+# Verifications technologies
+
+# Symfony ok
 def create_symfony_project(project_name):
     testInstallsymfony()
     print("Tout est installé")
@@ -77,7 +91,7 @@ def create_symfony_project(project_name):
     os.system("yarn install")
 
 # vuejs pas ok
-def create_vue_project(project_name, install_sass = 0, routage = 0):
+def create_vue_project(project_name, install_sass=0, routage=0):
     testInstallNode()
     os.system("npm install -g @vue/cli")
     os.system("vue create " + project_name)
@@ -86,15 +100,15 @@ def create_vue_project(project_name, install_sass = 0, routage = 0):
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass:
-        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
-#React ok
-def create_react_project(project_name, install_sass = 0, routage = 0):
+# React ok
+def create_react_project(project_name, install_sass=0, routage=0):
     testInstallNode()
     os.system("npx create-react-app " + project_name)
     os.chdir(project_name)
@@ -103,24 +117,22 @@ def create_react_project(project_name, install_sass = 0, routage = 0):
     os.mkdir("components")
     os.chdir("..")
     if install_sass:
-        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
-
-
-#Bot Discord ok
+# Bot Discord ok
 def create_bot_discord():
     testInstallNode()
     os.system("git clone https://github.com/DamienFoulon/obot.git")
     os.chdir("obot")
     os.system("npm install")
 
-#MERN ok
-def create_mern_stack(project_name, install_sass = 0, routage = 0):
+# MERN ok
+def create_mern_stack(project_name, install_sass=0, routage=0):
     testInstallNode()
     os.system("mkdir " + project_name)
     os.chdir(project_name)
@@ -139,7 +151,7 @@ def create_mern_stack(project_name, install_sass = 0, routage = 0):
     os.chdir("..")
     if install_sass == 1:
         os.chdir("client")
-        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
         os.chdir("..")
     elif routage == 1:
         os.chdir("src")
@@ -147,9 +159,8 @@ def create_mern_stack(project_name, install_sass = 0, routage = 0):
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
-
-#React Symfony ok
-def create_react_symfony_project(project_name, install_sass = 0, routage = 0):
+# React Symfony ok
+def create_react_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
     os.system("symfony new " + project_name)
     os.chdir(project_name)
@@ -165,28 +176,54 @@ def create_react_symfony_project(project_name, install_sass = 0, routage = 0):
     os.chdir("..")
     os.chdir("..")
     if install_sass == 1:
-        os.system("yarn add sass") #ajouter sass dans le bon dossier (assets)
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
-
-#intervention user pour la création du projet  nextjs
-def create_nextjs_project(project_name, install_sass = 0, routage = 0):
+# NextJS ok
+# Intervention user pour la création du projet nextjs
+def create_nextjs_project(project_name, install_sass=0, routage=0):
     testInstallNode()
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
     os.system("yarn install")
     if install_sass == 1:
-        os.system("yarn add sass")#ajouter sass dans le bon dossier (assets)
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
     elif routage == 1:
         os.chdir("src")
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
 
+# NextJS Symfony ok
+# Intervention user pour la création du projet nextjs
+def create_next_symfony_project(project_name, install_sass=0, routage=0):
+    testInstallsymfony()
+    os.system("symfony new " + project_name)
+    os.chdir(project_name)
+    os.system("composer require symfony/webpack-encore-bundle")
+    os.system("yarn install")
+    os.system("yarn add @symfony/webpack-encore --dev")
+    os.system("npx create-next-app")
+    os.system("yarn install")
+    os.chdir("assets")
+    os.mkdir("js")
+    os.chdir("js")
+    os.mkdir("components")
+    os.chdir("..")
+    os.chdir("..")
+    if install_sass == 1:
+        os.system("yarn add sass")  # ajouter sass dans le bon dossier (assets)
+    elif routage == 1:
+        os.chdir("src")
+        os.mkdir("routage")
+        os.chdir("routage")
+        os.system("yarn add react-router-dom")
+
+# Create project
 def create_project():
     project_name = entree0.get().strip()
     project_type = type.get().strip()
@@ -197,12 +234,12 @@ def create_project():
         error_label.config(text="Veuillez saisir un nom de projet.")
         return
 
-    if project_type == "symfony-project":
+    if project_type == "Symfony-Project":
         create_symfony_project(project_name)
         cbtn1.grid_forget()
         cbtn2.grid_forget()
 
-    elif project_type == "vue-project":
+    elif project_type == "Vue-Project":
         create_vue_project(project_name)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
@@ -213,8 +250,8 @@ def create_project():
         else:
             cbtn2.pack_forget()
 
-    elif project_type == "react-project":
-        create_react_project(project_name,install_sass,routage)
+    elif project_type == "React-Project":
+        create_react_project(project_name, install_sass, routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
@@ -224,15 +261,13 @@ def create_project():
         else:
             cbtn2.pack_forget()
 
-
-    elif project_type == "bot-discord":
+    elif project_type == "Bot-Discord":
         create_bot_discord()
         cbtn1.grid_forget()
         cbtn2.grid_forget()
 
-
     elif project_type == "MERN":
-        create_mern_stack(project_name,install_sass,routage)
+        create_mern_stack(project_name, install_sass, routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
@@ -242,9 +277,8 @@ def create_project():
         else:
             cbtn2.grid_forget()
 
-
-    elif project_type == "react-symfony":
-        create_react_symfony_project(project_name,install_sass,routage)
+    elif project_type == "React-Symfony":
+        create_react_symfony_project(project_name, install_sass, routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
@@ -253,10 +287,9 @@ def create_project():
             cbtn2.grid(row=10, column=0)
         else:
             cbtn2.grid_forget()
-
 
     elif project_type == "NextJS":
-        create_nextjs_project(project_name,install_sass,routage)
+        create_nextjs_project(project_name, install_sass, routage)
         if btn1.get() == 1:
             cbtn1.grid(row=9, column=0)
         else:
@@ -266,8 +299,19 @@ def create_project():
         else:
             cbtn2.grid_forget()
 
-            success_label.config(text="Le projet {} a été créé avec succès!".format(project_name))
+    elif project_type == "Next-Symfony":
+        create_next_symfony_project(project_name, install_sass, routage)
+        if btn1.get() == 1:
+            cbtn1.grid(row=9, column=0)
+        else:
+            cbtn1.grid_forget()
+        if btn2.get() == 1:
+            cbtn2.grid(row=10, column=0)
+        else:
+            cbtn2.grid_forget()
 
+            success_label.config(
+                text="Le projet {} a été créé avec succès!".format(project_name))
 
 
 def update_tool_options(event):
@@ -293,10 +337,11 @@ def update_tool_options(event):
     elif project_type == "NextJS":
         cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
         cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
+    elif project_type == "next-symfony":
+        cbtn1.grid(row=9, column=0, sticky="w", padx=10, pady=5)
+        cbtn2.grid(row=10, column=0, sticky="w", padx=10, pady=5)
     else:
         cbtn1.grid_forget()
-
-
 
 
 # Création de la fenêtre principale
@@ -306,7 +351,8 @@ fenetre.configure(background="#03224c")
 fenetre.geometry("500x500")
 
 # Création d'un label pour le nom du projet
-label0 = tk.Label(fenetre, background="#03224c", foreground="White", text="Entrez le nom du projet: ")
+label0 = tk.Label(fenetre, background="#03224c",
+                  foreground="White", text="Entrez le nom du projet: ")
 label0.grid(row=0, column=0)
 
 # Création d'une zone de saisie pour le nom du projet
@@ -314,11 +360,13 @@ entree0 = tk.Entry(fenetre, width=30)
 entree0.grid(row=0, column=1)
 
 # Création d'un label pour le type de projet
-label1 = tk.Label(fenetre, background="#03224c", foreground="White", text="Choisissez le type de projet: ")
+label1 = tk.Label(fenetre, background="#03224c",
+                  foreground="White", text="Choisissez le type de projet: ")
 label1.grid(row=3, column=0)
 
 # Création d'une liste déroulante pour le type de projet
-type = ttk.Combobox(fenetre, values=["symfony-project", "vue-project", "react-project", "bot-discord", "MERN", "react-symfony", "NextJS"])
+type = ttk.Combobox(fenetre, values=["Symfony-Project", "Vue-Project",
+                    "React-Project", "bot-discord", "MERN", "React-Symfony", "NextJS", "Next-Symfony"])
 type.current(0)
 
 type.bind("<<ComboboxSelected>>", update_tool_options)
@@ -347,4 +395,3 @@ bouton.grid(row=11, column=1)
 
 # Lancement de la boucle principale
 fenetre.mainloop()
-
