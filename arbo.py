@@ -177,6 +177,10 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
     os.system("npx create-react-app client")
     os.chdir("client")
     os.chdir("src")
+    os.mkdir("utils")
+    os.chdir("utils")
+    connexion = open("connexion.js", "w+")  # créer le fichier connexion.js
+    connexion.close()
     os.mkdir("components")
     os.mkdir("pages")
     os.mkdir("styles")
