@@ -42,8 +42,7 @@ def testInstallNode():
 def testInstallPHP():
     try:
         php_version = subprocess.check_output(['php', '-v'])
-        print(
-            f"PHP est installé (version {php_version.decode().splitlines()[0]})")
+        print(f"PHP est installé (version {php_version.decode().splitlines()[0]})")
     except OSError:
         print("PHP n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
@@ -67,8 +66,7 @@ def testInstallComposer():
         print("Composer n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system(
-                "php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
+            os.system("php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
             os.system("php composer-setup.php")
             os.system("php -r \"unlink('composer-setup.php');\"")
             print("Composer est installé")
@@ -138,6 +136,8 @@ def create_vue_project(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # React ok
 def create_react_project(project_name, install_sass=0, routage=0):
@@ -155,6 +155,8 @@ def create_react_project(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # Bot Discord ok
 def create_bot_discord():
@@ -192,6 +194,8 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0):
@@ -216,6 +220,8 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # NextJS ok
 # Intervention user pour la création du projet nextjs
@@ -231,6 +237,8 @@ def create_nextjs_project(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # NextJS Symfony ok
 # Intervention user pour la création du projet nextjs
@@ -256,12 +264,23 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0):
         os.mkdir("routage")
         os.chdir("routage")
         os.system("yarn add react-router-dom")
+        routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
+        routeur.close()
 
 # Laravel ok
 def create_laravel_project(project_name):
     testInstallLaravel()
     os.system("laravel new " + project_name)
     os.chdir(project_name)
+
+#Angular ok
+def create_agular_projet(project_name):
+    testInstallNode()
+    os.system("npm install -g @angular/cli")
+    os.system("ng new " + project_name)
+    os.chdir(project_name)
+
+
 
 # Create project
 def create_project():
@@ -270,7 +289,7 @@ def create_project():
     install_sass = btn1.get()
     routage = btn2.get()
     if not project_name:
-        # Si le nom du projet n'est pas saisi, afficher une erreur
+        # Si le nom du projet n'est pas saisi, affiché une erreur
         error_label.config(text="Veuillez saisir un nom de projet.")
         return
 
@@ -355,6 +374,11 @@ def create_project():
         cbtn1.grid_forget()
         cbtn2.grid_forget()
 
+    elif project_type == "Angular-Project":
+        create_agular_projet(project_name)
+        cbtn1.grid_forget()
+        cbtn2.grid_forget()
+
         success_label.config(
             text="Le projet {} a été créé avec succès!".format(project_name))
 
@@ -388,6 +412,9 @@ def update_tool_options(event):
     elif project_type == "laravel-project":
         cbtn1.grid_forget()
         cbtn2.grid_forget()
+    elif project_type == "Angular-Project":
+        cbtn1.grid_forget()
+        cbtn2.grid_forget()
     else:
         cbtn1.grid_forget()
 
@@ -414,7 +441,7 @@ label1.grid(row=3, column=0)
 
 # Création d'une liste déroulante pour le type de projet
 type = ttk.Combobox(fenetre, values=["Symfony-Project", "Vue-Project",
-                    "React-Project", "bot-discord", "MERN", "React-Symfony", "NextJS", "Next-Symfony", "Laravel-Project"])
+                    "React-Project", "bot-discord", "MERN", "React-Symfony", "NextJS", "Next-Symfony", "Laravel-Project", "Angular-Project"])
 type.current(0)
 
 type.bind("<<ComboboxSelected>>", update_tool_options)
