@@ -201,7 +201,7 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/skeleton:\"6.2.*" + project_name)
+    os.system("composer create-project symfony/skeleton:\"6.2.*\""+ project_name)
     os.chdir(project_name)
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
@@ -245,7 +245,7 @@ def create_nextjs_project(project_name, install_sass=0, routage=0):
 # Intervention user pour la création du projet nextjs
 def create_next_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/skeleton:\"6.2.*" + project_name)
+    os.system("composer create-project symfony/skeleton:\"6.2.*\""+ project_name)
     os.chdir(project_name)
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
