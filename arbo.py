@@ -66,7 +66,7 @@ def testInstallComposer():
         print("Composer n'est pas installé, voulez-vous l'installer ?")
         answer = input("Entrez 'oui' ou 'non' : ")
         if answer.lower() in {'oui', 'o', 'yes', 'y'}:
-            os.system("php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"")
+            os.system("php -r \"copy('https://getcomposer.org/installer', 'composer-setup.php');\"") #erreur php access denied (pas de solution erreur sur pc du taf ) 
             os.system("php composer-setup.php")
             os.system("php -r \"unlink('composer-setup.php');\"")
             print("Composer est installé")
@@ -114,7 +114,7 @@ def testInstallLaravel():
 def create_symfony_project(project_name):
     testInstallsymfony()
     print("Tout est installé")
-    os.system("composer create-project symfony/skeleton:"+"6.2.*" + project_name)
+    os.system("composer create-project symfony/skeleton:\"6.2.*\"" + " " + project_name)#executable a verifier 
     os.chdir(project_name)
     os.system("composer install")
     os.system("composer require symfony/webpack-encore-bundle")
@@ -201,7 +201,7 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/skeleton:\"6.2.*\"" + project_name)
+    os.system("composer create-project symfony/skeleton:\"6.2.*\"" + " " + project_name)#executable a verifier
     os.chdir(project_name)
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
