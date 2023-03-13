@@ -200,7 +200,7 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
-    os.system("symfony new " + project_name)
+    os.system("composer create-project symfony/website-skeleton " + project_name)
     os.chdir(project_name)
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
