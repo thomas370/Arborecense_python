@@ -119,6 +119,10 @@ def create_symfony_project(project_name):
     os.system("composer install")
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
+    #remplacer le fichier composer.json par le fichier composer.json du dossier resources 
+    os.system("mv Resources/composer.json project_name/composer.json")
+    os.system("composer install")
+    os.system("composer update \""+"symfony/*"" --with-all-dependencies")
 
 # vuejs pas ok
 
@@ -214,6 +218,10 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
+    #remplacer le fichier composer.json par le fichier composer.json du dossier resources 
+    os.system("mv Resources/composer.json project_name/composer.json")
+    os.system("composer install")
+    os.system("composer update \""+"symfony/*"" --with-all-dependencies")
     if install_sass == 1:
         install_options_sass()
     elif routage == 1:
