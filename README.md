@@ -34,7 +34,7 @@ keyboard : pip install keyboard
 subprocess : pip install subprocess
 
 ```
-**Warning**
+> **WARNING**:
 if you have an error while running the script 
 example : (access denied, or others) 
 you have to run it as administrator
