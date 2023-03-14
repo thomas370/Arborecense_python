@@ -114,15 +114,12 @@ def testInstallLaravel():
 def create_symfony_project(project_name):
     testInstallsymfony()
     print("Tout est installé")
-    os.system("composer create-project symfony/website-skeleton" + " " + project_name)#executable a verifier 
+    os.system("composer create-project symfony/skeleton:"+"6.2.*"+" "+ project_name)
     os.chdir(project_name)
+    os.system("composer require webapp")
     os.system("composer install")
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
-    #remplacer le fichier composer.json par le fichier composer.json du dossier resources 
-    os.system("mv Resources/composer.json"+' '+ project_name +"/composer.json")
-    os.system("composer install")
-    os.system("composer update \""+"symfony/*")
 
 # vuejs pas ok
 
@@ -205,12 +202,11 @@ def create_mern_stack(project_name, install_sass=0, routage=0):
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/website-skeleton" + " " + project_name)#executable a verifier
+    os.system("composer create-project symfony/skeleton:"+"6.2.*"+" "+ project_name)
     os.chdir(project_name)
+    os.system("composer require webapp")
     os.system("composer require symfony/webpack-encore-bundle")
-    os.system("yarn install")
     os.system("yarn add @symfony/webpack-encore --dev")
-    os.system("npx create-react-app")
     os.system("yarn install")
     os.chdir("assets")
     os.mkdir("js")
@@ -218,10 +214,6 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0):
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    #remplacer le fichier composer.json par le fichier composer.json du dossier resources 
-    os.system("mv Resources/composer.json"+' '+ project_name +"/composer.json")
-    os.system("composer install")
-    os.system("composer update \""+"symfony/*"" --with-all-dependencies")
     if install_sass == 1:
         install_options_sass()
     elif routage == 1:
