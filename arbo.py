@@ -275,7 +275,7 @@ def create_laravel_project(project_name):
     os.chdir(project_name)
 
 #Angular ok
-def create_agular_projet(project_name):
+def create_angular_projet(project_name):
     testInstallNode()
     os.system("npm install -g @angular/cli")
     os.system("ng new " + project_name)
@@ -376,7 +376,7 @@ def create_project():
         cbtn2.grid_forget()
 
     elif project_type == "Angular-Project":
-        create_agular_projet(project_name)
+        create_angular_projet(project_name)
         cbtn1.grid_forget()
         cbtn2.grid_forget()
 
