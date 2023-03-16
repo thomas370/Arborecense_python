@@ -164,6 +164,28 @@ def create_react_project(project_name, install_sass=0, routage=0, composants_men
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
+        os.mkdir("styles")
+        os.chdir("styles")
+        menustyles = open("Menu.css", "w+")
+        menustyles.close()
+    elif (composants_menu == 1) and (install_sass == 1):
+        os.chdir("assets")
+        os.chdir("js")
+        os.chdir("components")
+        menu = open("Menu.js", "w+")
+        menu.close()
+        os.mkdir("scss")
+        os.chdir("scss")
+        main = open("main.scss", "w+")  # créer le fichier main.scss
+        main.close()
+        variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+        variables.close()
+        responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+        responsive.close()
+        menustyles = open("Menu.scss", "w+")
+        menustyles.close()
+        os.system("yarn add sass")
+
 # Bot Discord ok
 def create_bot_discord():
     testInstallNode()
@@ -208,6 +230,28 @@ def create_mern_stack(project_name, install_sass=0, routage=0, composants_menu=0
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
+        os.mkdir("styles")
+        os.chdir("styles")
+        menustyles = open("Menu.css", "w+")
+        menustyles.close()
+    elif (composants_menu == 1) and (install_sass == 1):
+        os.chdir("assets")
+        os.chdir("js")
+        os.chdir("components")
+        menu = open("Menu.js", "w+")
+        menu.close()
+        os.mkdir("scss")
+        os.chdir("scss")
+        main = open("main.scss", "w+")  # créer le fichier main.scss
+        main.close()
+        variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+        variables.close()
+        responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+        responsive.close()
+        menustyles = open("Menu.scss", "w+")
+        menustyles.close()
+        os.system("yarn add sass")
+
 
 # React Symfony ok
 def create_react_symfony_project(project_name, install_sass=0, routage=0, composants_menu=0):
@@ -240,6 +284,28 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0, compos
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
+        os.mkdir("styles")
+        os.chdir("styles")
+        menustyles = open("Menu.css", "w+")
+        menustyles.close()
+    elif (composants_menu == 1) and (install_sass == 1):
+        os.chdir("assets")
+        os.chdir("js")
+        os.chdir("components")
+        menu = open("Menu.js", "w+")
+        menu.close()
+        os.mkdir("scss")
+        os.chdir("scss")
+        main = open("main.scss", "w+")  # créer le fichier main.scss
+        main.close()
+        variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+        variables.close()
+        responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+        responsive.close()
+        menustyles = open("Menu.scss", "w+")
+        menustyles.close()
+        os.system("yarn add sass")
+
 
 
 # NextJS ok
@@ -264,6 +330,29 @@ def create_nextjs_project(project_name, install_sass=0, routage=0, composants_me
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
+        os.mkdir("styles")
+        os.chdir("styles")
+        menustyles = open("Menu.css", "w+")
+        menustyles.close()
+    elif (composants_menu == 1) and (install_sass == 1):
+        os.chdir("assets")
+        os.chdir("js")
+        os.chdir("components")
+        menu = open("Menu.js", "w+")
+        menu.close()
+        os.mkdir("scss")
+        os.chdir("scss")
+        main = open("main.scss", "w+")  # créer le fichier main.scss
+        main.close()
+        variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+        variables.close()
+        responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+        responsive.close()
+        menustyles = open("Menu.scss", "w+")
+        menustyles.close()
+        os.system("yarn add sass")
+
+
 
 # NextJS Symfony ok
 # Intervention user pour la création du projet nextjs
@@ -272,7 +361,6 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0, composa
     os.system("composer create-project symfony/skeleton:\"6.2.*\"" + project_name)
     os.chdir(project_name)
     os.system("composer require symfony/webpack-encore-bundle")
-    os.system("yarn install")
     os.system("yarn add @symfony/webpack-encore --dev")
     os.system("npx create-next-app")
     os.system("yarn install")
@@ -297,6 +385,27 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0, composa
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
+        os.mkdir("styles")
+        os.chdir("styles")
+        menustyles = open("Menu.css", "w+")
+        menustyles.close()
+    elif (composants_menu == 1) and (install_sass == 1):
+        os.chdir("assets")
+        os.chdir("js")
+        os.chdir("components")
+        menu = open("Menu.js", "w+")
+        menu.close()
+        os.mkdir("scss")
+        os.chdir("scss")
+        main = open("main.scss", "w+")  # créer le fichier main.scss
+        main.close()
+        variables = open("_variables.scss", "w+")  # créer le fichier _variables.scss
+        variables.close()
+        responsive = open("_responsive.scss", "w+")  # créer le fichier _responsive.scss
+        responsive.close()
+        menustyles = open("Menu.scss", "w+")
+        menustyles.close()
+        os.system("yarn add sass")
 
 # Laravel ok
 def create_laravel_project(project_name):
@@ -337,6 +446,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.pack_forget()
+        #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
@@ -355,6 +465,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
@@ -376,6 +487,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
@@ -392,6 +504,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
@@ -408,6 +521,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
+        #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
@@ -424,7 +538,7 @@ def create_project():
             cbtn1.grid(row=9, column=0)
         else:
             cbtn1.grid_forget()
-
+            #################################
         if btn2.get() == 1:
             cbtn2.grid(row=10, column=0)
         else:
