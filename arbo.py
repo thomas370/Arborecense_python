@@ -111,17 +111,18 @@ def testInstallLaravel():
 # Verifications technologies
 
 # Symfony ok
+# Intervention user pour la création du projet nextjs
 def create_symfony_project(project_name):
     testInstallsymfony()
     print("Tout est installé")
-    os.system("composer create-project symfony/website-skeleton" + " " + project_name)#executable a verifier 
+    os.system("symfony new" + " " + project_name + " " + "--version=""6.2.*")#executable a verifier 
     os.chdir(project_name)
     os.system("composer install")
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
 
 # vuejs pas ok
-
+# Intervention user pour la création du projet nextjs
 def create_vue_project(project_name, install_sass=0, routage=0):
     testInstallNode()
     os.system("npm install -g @vue/cli")
@@ -149,7 +150,7 @@ def create_react_project(project_name, install_sass=0, routage=0, composants_men
     os.chdir("src")
     os.mkdir("components")
     os.chdir("..")
-    if install_sass == 1:
+    if (install_sass == 1) and (composants_menu == 0):
         install_options_sass()
     elif routage == 1:
         os.chdir("src")
@@ -158,9 +159,8 @@ def create_react_project(project_name, install_sass=0, routage=0, composants_men
         os.system("yarn add react-router-dom")
         routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
         routeur.close()
-    elif composants_menu == 1:
-        os.chdir("assets")
-        os.chdir("js")
+    elif (composants_menu == 1) and (install_sass == 0):
+        os.chdir("src")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -169,8 +169,7 @@ def create_react_project(project_name, install_sass=0, routage=0, composants_men
         menustyles = open("Menu.css", "w+")
         menustyles.close()
     elif (composants_menu == 1) and (install_sass == 1):
-        os.chdir("assets")
-        os.chdir("js")
+        os.chdir("src")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -211,11 +210,11 @@ def create_mern_stack(project_name, install_sass=0, routage=0, composants_menu=0
     os.chdir("utils")
     connexion = open("connexion.js", "w+")  # créer le fichier connexion.js
     connexion.close()
+    os.chdir("..")
     os.mkdir("components")
     os.mkdir("pages")
-    os.mkdir("styles")
     os.chdir("..")
-    if install_sass == 1:
+    if (install_sass == 1) and (composants_menu == 0):
         install_options_sass()
     elif routage == 1:
         os.chdir("src")
@@ -224,9 +223,8 @@ def create_mern_stack(project_name, install_sass=0, routage=0, composants_menu=0
         os.system("yarn add react-router-dom")
         routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
         routeur.close()
-    elif composants_menu == 1:
-        os.chdir("assets")
-        os.chdir("js")
+    elif (composants_menu == 1) and (install_sass == 0):
+        os.chdir("src")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -235,8 +233,7 @@ def create_mern_stack(project_name, install_sass=0, routage=0, composants_menu=0
         menustyles = open("Menu.css", "w+")
         menustyles.close()
     elif (composants_menu == 1) and (install_sass == 1):
-        os.chdir("assets")
-        os.chdir("js")
+        os.chdir("src")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -254,10 +251,12 @@ def create_mern_stack(project_name, install_sass=0, routage=0, composants_menu=0
 
 
 # React Symfony ok
+# Intervention user pour la création du projet nextjs
 def create_react_symfony_project(project_name, install_sass=0, routage=0, composants_menu=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/website-skeleton" + " " + project_name)#executable a verifier
+    os.system("composer create-project symfony/skeleton:"+"6.2.*" + " " + project_name)#executable functionnelle
     os.chdir(project_name)
+    os.system("composer require webapp")
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn install")
     os.system("yarn add @symfony/webpack-encore --dev")
@@ -269,7 +268,7 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0, compos
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass == 1:
+    if (install_sass == 1) and (composants_menu == 0):
         install_options_sass()
     elif routage == 1:
         os.chdir("src")
@@ -278,7 +277,7 @@ def create_react_symfony_project(project_name, install_sass=0, routage=0, compos
         os.system("yarn add react-router-dom")
         routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
         routeur.close()
-    elif composants_menu == 1:
+    elif (composants_menu == 1) and (install_sass == 0):
         os.chdir("assets")
         os.chdir("js")
         os.chdir("components")
@@ -315,7 +314,7 @@ def create_nextjs_project(project_name, install_sass=0, routage=0, composants_me
     os.system("npx create-next-app " + project_name)
     os.chdir(project_name)
     os.system("yarn install")
-    if install_sass == 1:
+    if (install_sass == 1) and (composants_menu == 0):
         install_options_sass()
     elif routage == 1:
         os.chdir("src")
@@ -324,9 +323,9 @@ def create_nextjs_project(project_name, install_sass=0, routage=0, composants_me
         os.system("yarn add react-router-dom")
         routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
         routeur.close()
-    elif composants_menu == 1:
-        os.chdir("assets")
-        os.chdir("js")
+    elif (composants_menu == 1) and (install_sass == 0):
+        os.chdir("src")
+        os.mkdir("components")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -335,8 +334,8 @@ def create_nextjs_project(project_name, install_sass=0, routage=0, composants_me
         menustyles = open("Menu.css", "w+")
         menustyles.close()
     elif (composants_menu == 1) and (install_sass == 1):
-        os.chdir("assets")
-        os.chdir("js")
+        os.chdir("src")
+        os.mkdir("components")
         os.chdir("components")
         menu = open("Menu.js", "w+")
         menu.close()
@@ -353,13 +352,13 @@ def create_nextjs_project(project_name, install_sass=0, routage=0, composants_me
         os.system("yarn add sass")
 
 
-
 # NextJS Symfony ok
 # Intervention user pour la création du projet nextjs
 def create_next_symfony_project(project_name, install_sass=0, routage=0, composants_menu=0):
     testInstallsymfony()
-    os.system("composer create-project symfony/skeleton:\"6.2.*\"" + project_name)
+    os.system("composer create-project symfony/skeleton:"+"6.2.*" + " " + project_name)#executable functionnelle
     os.chdir(project_name)
+    os.system("composer require webapp")
     os.system("composer require symfony/webpack-encore-bundle")
     os.system("yarn add @symfony/webpack-encore --dev")
     os.system("npx create-next-app")
@@ -370,7 +369,7 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0, composa
     os.mkdir("components")
     os.chdir("..")
     os.chdir("..")
-    if install_sass == 1:
+    if (install_sass == 1) and (composants_menu == 0):
         install_options_sass()
     elif routage == 1:
         os.chdir("src")
@@ -379,7 +378,7 @@ def create_next_symfony_project(project_name, install_sass=0, routage=0, composa
         os.system("yarn add react-router-dom")
         routeur = open("routeur.js", "w+")  # créer le fichier routeur.js
         routeur.close()
-    elif composants_menu == 1:
+    elif (composants_menu == 1) and (install_sass == 0):
         os.chdir("assets")
         os.chdir("js")
         os.chdir("components")
@@ -453,7 +452,7 @@ def create_project():
             cbtn2.pack_forget()
         #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
         
@@ -472,7 +471,7 @@ def create_project():
             cbtn2.grid_forget()
         #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
 
@@ -494,7 +493,7 @@ def create_project():
             cbtn2.grid_forget()
         #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
 
@@ -511,7 +510,7 @@ def create_project():
             cbtn2.grid_forget()
         #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
 
@@ -528,7 +527,7 @@ def create_project():
             cbtn2.grid_forget()
         #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
 
@@ -545,7 +544,7 @@ def create_project():
             cbtn2.grid_forget()
             #################################
         if btn3.get() == 1:
-            cbtn3.grid(row=10, column=0)
+            cbtn3.grid(row=11, column=0)
         else:
             cbtn3.grid_forget()
 
